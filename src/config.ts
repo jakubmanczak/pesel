@@ -15,12 +15,20 @@ export const config = {
 				"Enter a PESEL number to check.",
 				"Podaj numer PESEL do sprawdzenia.",
 			],
-			incorrect: ["PESEL number incorrect.", "Niepoprawny numer PESEL."],
-			resultstitle: ["PESEL number correct.", "Poprawny numer PESEL."],
 			presubresult: [
 				"A suitable PESEL number should consist of 11 digits.",
 				"PESEL powinien składać się z 11 cyfr.",
 			],
+			incorrect: ["PESEL number incorrect.", "Niepoprawny numer PESEL."],
+			resultstitle: ["PESEL number correct.", "Poprawny numer PESEL."],
+			dateofbirth: ["Date of birth", "Data urodzenia"],
+			serialnum: ["Serial number", "Numer serii"],
+			biosexnum: ["Biological sex number", "Numer płci"],
+			biosexname: [
+				["Female", "Kobieta"],
+				["Male", "Mężczyzna"],
+			],
+			controlnum: ["Checksum", "Liczba kontrolna"],
 		},
 		disclaimer: [
 			"All verification and analysis is performed in your browser - no data is sent anywhere.",

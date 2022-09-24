@@ -28,6 +28,23 @@
 		return (parseInt(inputstr[10]) === getPeselChecksum(inputstr));
 	}
 	$: correct = evaluatePeselValidity(input);
+
+	function calculateYear(inputstr: string){
+		if(parseInt(inputstr[2]) === 0 || parseInt(inputstr[2]) === 1){
+			return "19";
+		}else if(parseInt(inputstr[2]) === 2 || parseInt(inputstr[2]) === 3){
+			return "20";
+		}else if(parseInt(inputstr[2]) === 4 || parseInt(inputstr[2]) === 5){
+			return "21";
+		}else if(parseInt(inputstr[2]) === 6 || parseInt(inputstr[2]) === 7){
+			return "22";
+		}else{
+			return "23";
+		}
+	}
+	function getSexIndex(inputstr: string){
+		return (parseInt(inputstr[9]) % 2) ? 1 : 0;
+	}
 </script>
 
 <main>
@@ -39,6 +56,24 @@
 <article>
 	{#if input.length === 11 && correct}
 		<h2>{config.uitext.results.resultstitle[lang]}</h2>
+		<div class="grid">
+			<div>
+				<p>{config.uitext.results.dateofbirth[lang]}</p>
+				<h1>{calculateYear(input)}{input[0]}{input[1]}{"-"}{(parseInt(input[2]) % 2) ? "1" : "0"}{input[3]}{"-"}{input[4]}{input[5]}</h1>
+			</div>
+			<div>
+				<p>{config.uitext.results.serialnum[lang]}</p>
+				<h1>{input[6]}{input[7]}{input[8]}{input[9]}</h1>
+			</div>
+			<div>
+				<p>{config.uitext.results.biosexnum[lang]}</p>
+				<h1>{config.uitext.results.biosexname[getSexIndex(input)][lang]}</h1>
+			</div>
+			<div>
+				<p>{config.uitext.results.controlnum[lang]}</p>
+				<h1>{input[10]}</h1>
+			</div>
+		</div>
 	{:else if input.length === 11 && !correct}
 		<h2>{config.uitext.results.incorrect[lang]}</h2>
 	{:else}
@@ -49,7 +84,7 @@
 		<p>
 			{config.uitext.disclaimer[lang]}
 		</p>
-		<a href="https://manczak.net" class="author">
+		<a href="https://manczak.net" data-tooltip="https://manczak.net" class="author">
 			<p>~ Jakub Mańczak, 2022</p>
 			<img src="https://avatars.githubusercontent.com/u/56172798" alt="jakub mańczak in 2022">
 		</a>
