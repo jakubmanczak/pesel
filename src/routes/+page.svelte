@@ -39,7 +39,7 @@
 		}else if(parseInt(inputstr[2]) === 6 || parseInt(inputstr[2]) === 7){
 			return "22";
 		}else{
-			return "23";
+			return "18";
 		}
 	}
 	function getSexIndex(inputstr: string){
