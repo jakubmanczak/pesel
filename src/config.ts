@@ -1,6 +1,6 @@
 export const config = {
 	uitext: {
-		maintitle: ["PESEL", "PESEL"],
+		maintitle: ["PESEL Number", "PESEL"],
 		subtitle: [
 			"PESEL number verificator and analyzer.",
 			"Analizator i weryfikator numeru PESEL.",
@@ -15,19 +15,16 @@ export const config = {
 				"Enter a PESEL number to check.",
 				"Podaj numer PESEL do sprawdzenia.",
 			],
-			incorrect: ["Incorrect PESEL number.", "Niepoprawny numer PESEL."],
-			resultstitle: [
-				"Information encoded in the PESEL above",
-				"Informacje zawarte w podanym PESEL-u",
-			],
+			incorrect: ["PESEL number incorrect.", "Niepoprawny numer PESEL."],
+			resultstitle: ["PESEL number correct.", "Poprawny numer PESEL."],
 			presubresult: [
 				"A suitable PESEL number should consist of 11 digits.",
 				"PESEL powinien składać się z 11 cyfr.",
 			],
-			disclaimer: [
-				"All verification and analysis is performed in your browser - no data is sent anywhere.",
-				"Całość weryfikacji i analizy dzieje się w przeglądarce - dane nie są nigdzie wysyłane.",
-			],
 		},
+		disclaimer: [
+			"All verification and analysis is performed in your browser - no data is sent anywhere.",
+			"Całość weryfikacji i analizy dzieje się w przeglądarce - dane nie są nigdzie wysyłane.",
+		],
 	},
 };
