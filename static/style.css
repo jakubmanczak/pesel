@@ -8,7 +8,7 @@ body {
 	font-family: "Lato", sans-serif;
 }
 main {
-	width: 768px;
+	max-width: 768px;
 	text-align: center;
 	display: block;
 	margin: 0 auto;
@@ -27,6 +27,12 @@ main > input {
 	font-size: 1.5rem;
 	padding-left: 4rem;
 }
+@media screen and (max-width: 600px) {
+	main > input {
+		font-size: 1rem;
+		text-align: center;
+	}
+}
 main > p.inputstatus {
 	text-align: left;
 	width: fit-content;
@@ -37,6 +43,16 @@ footer {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+@media screen and (max-width: 600px) {
+	footer {
+		flex-direction: column;
+		text-align: center;
+		gap: 1rem;
+	}
+	article {
+		text-align: center;
+	}
 }
 .grid {
 	text-align: center !important;
