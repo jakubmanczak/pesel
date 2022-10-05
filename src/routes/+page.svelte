@@ -3,6 +3,8 @@
 	let input: string = "";
 	let lang: number = 1;
 	let correct: boolean;
+	let dateUnrealistic: boolean;
+	let dateUnrealisticityWarning: string;
 
 	function getPeselChecksum(inputstr: string){
 		let result: number;
@@ -28,6 +30,35 @@
 		return (parseInt(inputstr[10]) === getPeselChecksum(inputstr));
 	}
 	$: correct = evaluatePeselValidity(input);
+
+	function evaluateDateUnrealisticity(inputstr: string){
+		let dobDay = parseInt(`${inputstr[4]}${inputstr[5]}`);
+		let dobMonth = parseInt(`${(parseInt(input[2]) % 2) ? "1" : "0"}${input[3]}`);
+		let dobYear = parseInt(`${calculateYear(inputstr)}${input[0]}${input[1]}`);
+		let dobDayTooBig = false;
+		
+		if((dobMonth === 2 && dobDay > 28) || (dobMonth % 2 === (dobMonth < 8 ? 1 : 0) && dobDay > 31) || (dobMonth % 2 === (dobMonth < 8 ? 0 : 1) && dobDay > 30)){
+			dobDayTooBig = true;
+		}
+		
+		if(dobDayTooBig && dobMonth > 12){
+			dateUnrealisticityWarning = config.uitext.realisticityWarnings.bothTooBig[lang];
+			return true;
+		}else if(dobDayTooBig){
+			dateUnrealisticityWarning = config.uitext.realisticityWarnings.dayTooBig[lang];
+			return true;
+		}else if(dobMonth > 12){
+			dateUnrealisticityWarning = config.uitext.realisticityWarnings.monthTooBig[lang];
+			return true;
+		}else if(dobYear > new Date().getFullYear()){
+			dateUnrealisticityWarning = config.uitext.realisticityWarnings.yearInFuture[lang];
+			return true;
+		}
+		
+		return false;
+		// true = unrealistic; false = realistic
+	}
+	$: dateUnrealistic = evaluateDateUnrealisticity(input);
 
 	function calculateYear(inputstr: string){
 		if(parseInt(inputstr[2]) === 0 || parseInt(inputstr[2]) === 1){
@@ -74,6 +105,9 @@
 				<h1>{input[10]}</h1>
 			</div>
 		</div>
+		{#if dateUnrealistic}
+			<p>{config.uitext.realisticityWarnings.warningPrefix[lang]} {dateUnrealisticityWarning}</p>
+		{/if}
 	{:else if input.length === 11 && !correct}
 		<h2>{config.uitext.results.incorrect[lang]}</h2>
 	{:else}
